@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEP Program | หาดใหญ่รัฐประชาสรรค์</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #FF6B35;
+            --blue: #004E89;
+            --pink: #FF5E8A;
+            --dark: #292F36;
+            --light: #F7F7F7;
+            --white: #FFFFFF;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Prompt', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Kanit', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--pink));
+            border-radius: 2px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, var(--orange), var(--pink));
+            color: white;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--orange);
+            color: var(--orange);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background: var(--orange);
+            color: white;
+        }
+        
+        /* Glass Morphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+        
+        /* Header Styles */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        header.scrolled .logo-text h1,
+        header.scrolled nav ul li a {
+            color: var(--dark);
+        }
+
+        header.scrolled .logo-text p {
+            color: var(--dark) !important;
+        }
+
+        header.scrolled .logo-text h1,
+        header.scrolled .logo-text p,
+        header.scrolled nav ul li a {
+            color: var(--dark) !important;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--orange);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 800px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--blue), #ffb1ee);
+            color: white;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://lh3.googleusercontent.com/gps-cs-s/AC9h4nppyrLtonXSTMd87S2ig55n8zPgIdB5fQQuKArP2BKSV9oznscYIQtlN0-rxSm2NqAHHPhY8nTD97acVoyGaP1hDeJg6Jyqz-8N3v0j8Zdq8B_cJNxyO9HDAi9WTrUB57NulRuB=s1360-w1360-h1020') no-repeat center center/cover;
+            opacity: 0.2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            animation: fadeInUp 1.4s ease;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 50%;
+            max-width: 800px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: var(--light);
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            color: var(--blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .about-features {
+            margin-top: 2rem;
+        }
+        
+        .about-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-feature-icon {
+            font-size: 1.8rem;
+            color: var(--orange);
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .about-feature-text h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Program Features */
+        .features {
+            background-color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--pink), rgba(255, 94, 138, 0.3));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            z-index: 0;
+            animation: morph 8s ease-in-out infinite;
+        }
+        
+        .features::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -150px;
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(45deg, var(--orange), rgba(255, 107, 53, 0.3));
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            z-index: 0;
+            animation: morph 12s ease-in-out infinite;
+        }
+        
+        .features-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--orange), var(--pink));
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover::before {
+            height: 100%;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--orange);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--blue);
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--blue), #003366);
+            color: white;
+            text-align: center;
+        }
+
+        #stats .section-title::after {
+            display: none !important;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .stat-item {
+            padding: 40px 20px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-family: 'Kanit', sans-serif;
+        }
+        
+        .stat-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-info h2 {
+            color: var(--blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .contact-details {
+            margin-top: auto;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--orange);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 0.3rem;
+            color: var(--dark);
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+    /* ปรับส่วน Contact Section */
+        .contact-container {
+            display: flex;
+            align-items: flex-start; /* จัดให้เนื้อหาเริ่มจากด้านบนเดียวกัน */
+            gap: 60px;
+        }
+
+        .contact-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-form {
+        flex: 1;
+        background-color: var(--white);
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        align-self: stretch; /* ให้ความสูงเท่ากัน */
+        }
+
+        .contact-details {
+        margin-top: auto;
+        padding-top: 20px; /* เพิ่มระยะห่างด้านบน */
+        }
+
+        .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        gap: 1.5rem; /* ระยะห่างระหว่าง icon กับข้อความ */
+        }
+
+/* ปรับ Responsive */
+@media (max-width: 992px) {
+    .contact-container {
+        flex-direction: column;
+    }
+    
+    .contact-form {
+        width: 100%;
+    }
+}
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Prompt', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: var(--light);
+        }
+        
+        .form-control:focus {
+            border-color: var(--orange);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--orange), var(--pink));
+        }
+        
+        .footer-col p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            transform: translateX(5px);
+            color: var(--orange);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background-color: var(--orange);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        @keyframes morph {
+            0% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 30px;
+            }
+            
+            .section {
+                padding: 100px 0;
+            }
+            
+            .hero h1 {
+                font-size: 4rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image {
+                display: none;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .section {
+                padding: 80px 0;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background-color: var(--white);
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                z-index: 1001;
+                padding: 80px 40px;
+            }
+            
+            nav.active {
+                right: 0;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0 0 20px 0;
+            }
+            
+            nav ul li a {
+                color: var(--dark);
+                font-size: 1.2rem;
+            }
+            
+            .close-menu-btn {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                font-size: 1.5rem;
+                color: var(--dark);
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    .close-menu-btn {
+        display: none; /* ซ่อนไว้ก่อน */
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 1.5rem;
+        color: var(--dark);
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 1002;
+    }
+    </style>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <header id="header">
+        <div class="container header-container">
+            <!-- ส่วนเนื้อหา Header ของคุณ -->
+            <a href="#" class="logo">
+                <img src="https://media.discordapp.net/attachments/1341780408232054794/1369342029934362724/hdhdhd.png?ex=681b82a5&is=681a3125&hm=61a052b07dd97ebcff6d03d31ee7717ba34d5a1dcea2425b77ec2b019eb599ee&=&format=webp&quality=lossless" alt="โรงเรียนหาดใหญ่รัฐประชาสรรค์">
+                <div class="logo-text">
+                    <h1>หาดใหญ่รัฐประชาสรรค์</h1>
+                    <p>โครงการ CEP</p>
+                </div>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav id="mainNav">
+                <button class="close-menu-btn" id="closeMenuBtn">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul>
+                    <li><a href="#home" class="active">หน้าหลัก</a></li>
+                    <li><a href="#about">เกี่ยวกับโครงการ</a></li>
+                    <li><a href="#features">จุดเด่น</a></li>
+                    <li><a href="#stats">สถิติ</a></li>
+                    <li><a href="#contact">ติดต่อเรา</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1>ห้องเรียนพิเศษ<br>Computer English Program</h1>
+                <p>เตรียมความพร้อมนักเรียนด้วยทักษะคอมพิวเตอร์และภาษาอังกฤษในศตวรรษที่ 21 ด้วยหลักสูตรที่ทันสมัยและครูผู้สอนที่มีความเชี่ยวชาญ</p>
+                <div class="hero-btns">
+                    <a href="#about" class="btn btn-primary">เรียนรู้เพิ่มเติม</a>
+                    <a href="#contact" class="btn btn-outline">ติดต่อเรา</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <h2 class="section-title">เกี่ยวกับโครงการ</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>โครงการห้องเรียนพิเศษ CEP</h2>
+                    <p>โครงการห้องเรียนพิเศษ CEP (Computer English Program) เป็นโครงการที่มุ่งเน้นการพัฒนาทักษะทางด้านคอมพิวเตอร์และภาษาอังกฤษให้กับนักเรียน โดยใช้หลักสูตรที่ทันสมัยและวิธีการสอนที่หลากหลาย เพื่อเตรียมความพร้อมให้นักเรียนสามารถก้าวทันโลกในยุคดิจิทัล</p>
+                    <p>นักเรียนในโครงการจะได้เรียนรู้ทั้งทักษะทางด้านเทคโนโลยีสารสนเทศและการสื่อสารภาษาอังกฤษผ่านกิจกรรมที่หลากหลาย ทั้งในและนอกห้องเรียน โดยมีครูผู้สอนที่มีความเชี่ยวชาญเฉพาะด้าน</p>
+                    
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="about-feature-text">
+                                <h4>การเรียนรู้ด้านคอมพิวเตอร์</h4>
+                                <p>หลักสูตรครอบคลุมการเขียนโปรแกรม การออกแบบกราฟิก และการใช้งานซอฟต์แวร์ต่างๆ</p>
+                            </div>
+                        </div>
+                        <div class="about-feature">
+                            <div class="about-feature-icon">
+                                <i class="fas fa-language"></i>
+                            </div>
+                            <div class="about-feature-text">
+                                <h4>การเรียนภาษาอังกฤษเข้มข้น</h4>
+                                <p>พัฒนาทักษะภาษาอังกฤษทั้ง 4 ด้าน ด้วยวิธีการสอนที่หลากหลาย</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://media.discordapp.net/attachments/1341780408232054794/1369358781418307704/image.png?ex=681b923e&is=681a40be&hm=78291cfe919aee7cec1dcfa04ad9497946e5f4b5fbd810338d1d382f24d70076&=&format=webp&quality=lossless&width=968&height=544" alt="นักเรียนโครงการ CEP">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="section features" id="features">
+        <div class="container features-container">
+            <h2 class="section-title">จุดเด่นของโครงการ</h2>
+            <p>โครงการ CEP ของเรามีจุดเด่นหลายประการที่ช่วยพัฒนาศักยภาพของนักเรียนอย่างรอบด้าน</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>การเขียนโปรแกรม</h3>
+                    <p>เรียนรู้พื้นฐานการเขียนโปรแกรมด้วยภาษา Python, C, HTML5</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>เทคโนโลยีสมัยใหม่</h3>
+                    <p>ศึกษาเกี่ยวกับ AI, Robot, STEM และเทคโนโลยีล้ำสมัยอื่นๆ ที่จำเป็นในยุคดิจิทัล</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>ครูผู้เชี่ยวชาญ</h3>
+                    <p>เรียนรู้จากครูผู้สอนที่มีประสบการณ์และความเชี่ยวชาญเฉพาะด้าน</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <h3>ภาษาอังกฤษเชิงปฏิบัติ</h3>
+                    <p>พัฒนาทักษะภาษาอังกฤษผ่านกิจกรรมและการสื่อสารจริงกับเจ้าของภาษา</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>โครงงานสร้างสรรค์</h3>
+                    <p>มีโอกาสทำงานโครงงานที่สามารถนำไปใช้ได้จริงและแข่งขันในระดับต่างๆ</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>โอกาสทางการศึกษา</h3>
+                    <p>เตรียมความพร้อมสำหรับการศึกษาต่อในสาขาที่เกี่ยวข้องกับเทคโนโลยี</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="section stats" id="stats">
+        <div class="container">
+            <h2 class="section-title">จำนวนต่างๆของ CEP</h2>
+            <p style="max-width: 700px; margin: 0 auto 40px; text-align: center; font-size: 1.1rem; opacity: 0.9;">ความสำเร็จของโครงการที่สามารถวัดได้ด้วยตัวเลข</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="87">0</div>
+                    <div class="stat-text">นักเรียนในโครงการ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="20">0</div>
+                    <div class="stat-text">ครูผู้เชี่ยวชาญ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="43">0</div>
+                    <div class="stat-text">รางวัลที่ได้รับ</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="97">0</div>
+                    <div class="stat-text">% ความพึงพอใจ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const counters = document.querySelectorAll('.stat-number');
+          const duration = 2000; // ms
+        
+          const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-count');
+            let current = 0;
+            const increment = target / (duration / 30); // นับทุก 30ms
+        
+            const updateCount = () => {
+              current += increment;
+              if (current < target) {
+                counter.innerText = Math.ceil(current);
+                setTimeout(updateCount, 30);
+              } else {
+                counter.innerText = target;
+              }
+            };
+        
+            updateCount();
+          };
+        
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !entry.target.dataset.started) {
+                entry.target.dataset.started = "true";
+                animateCounter(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.6 // เห็นประมาณ 60% ค่อยเริ่ม
+          });
+        
+          counters.forEach(counter => {
+            counter.innerText = "0"; // reset เผื่อ refresh หน้า
+            observer.observe(counter);
+          });
+        });
+        </script>        
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">ติดต่อเรา</h2>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>สอบถามข้อมูลเพิ่มเติม</h2>
+                    <p>หากคุณสนใจในโครงการห้องเรียนพิเศษ CEP หรือต้องการข้อมูลเพิ่มเติม สามารถติดต่อได้ผ่านช่องทางด้านล่างนี้</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>อีเมล</h4>
+                                <p>N/A</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>โทรศัพท์</h4>
+                                <p>N/A</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h4>ที่อยู่</h4>
+                                <p>1663 หมู่ 6 สนามบินพาณิชย์ ตำบลควนลัง อำเภอหาดใหญ่ จังหวัดสงขลา ประเทศไทย ประเทศไทย 90110</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--blue);">ส่งข้อความถึงเรา</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">ชื่อ-นามสกุล</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">อีเมล</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">หัวข้อ</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">ข้อความ</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="font-family: 'Prompt', sans-serif; width: 100%;">ส่งข้อความ</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.contact-form form');
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // รับค่าจากฟอร์ม
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // ตรวจสอบข้อมูล
+        if (!name || !email || !subject || !message) {
+            alert('กรุณากรอกข้อมูลให้ครบทุกช่อง');
+            return;
+        }
+        
+        // URL ของ Discord webhook
+        const webhookURL = 'https://canary.discord.com/api/webhooks/1369518786775875714/iNgCn7Fqg1gKcMfVxxSnCayCg1sKpw_HPns3kdC5TDGoCIZAsxm3xWIdl_KyWpkA3lFT';
+        
+        // สร้างข้อมูลที่จะส่งไป Discord
+        const payload = {
+            embeds: [{
+                title: subject,
+                color: 3447003, // สีฟ้า
+                fields: [
+                    {
+                        name: 'ชื่อผู้ส่ง',
+                        value: name,
+                        inline: true
+                    },
+                    {
+                        name: 'อีเมล',
+                        value: email,
+                        inline: true
+                    },
+                    {
+                        name: 'ข้อความ',
+                        value: message
+                    }
+                ],
+                timestamp: new Date().toISOString()
+            }]
+        };
+        
+        // ส่งข้อมูลไปยัง Discord webhook
+        fetch(webhookURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (response.ok) {
+                // ล้างฟอร์ม
+                form.reset();
+                
+                // แสดงข้อความสำเร็จ
+                alert('ส่งข้อความสำเร็จ ขอบคุณที่ติดต่อเรา');
+            } else {
+                alert('เกิดข้อผิดพลาดในการส่งข้อความ กรุณาลองใหม่อีกครั้ง');
+                console.error('Error:', response.status);
+            }
+        })
+        .catch(error => {
+            alert('เกิดข้อผิดพลาดในการส่งข้อความ กรุณาลองใหม่อีกครั้ง');
+            console.error('Error:', error);
+        });
+    });
+});
+    </script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>เกี่ยวกับโรงเรียน</h3>
+                    <p>โรงเรียนหาดใหญ่รัฐประชาสรรค์ เป็นโรงเรียนมัธยมศึกษาขนาดใหญ่ อยู่ในอำเภอหาดใหญ่ จังหวัดสงขลา</p>
+                    <div class="social-links">
+                        <a style="text-decoration:none" href="https://www.facebook.com/yrscep" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a style="text-decoration:none" href="#" class="social-link"><i class="fab fa-line"></i></a>
+                        <a style="text-decoration:none" href="https://youtu.be/_4_flpeUTmw" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>ลิงก์ด่วน</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">หน้าหลัก</a></li>
+                        <li><a href="#about">เกี่ยวกับโครงการ</a></li>
+                        <li><a href="#features">จุดเด่น</a></li>
+                        <li><a href="#contact">ติดต่อเรา</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>โครงการพิเศษ</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://www.facebook.com/yrscep">โครงการ CEP</a></li>
+                        <li><a href="https://www.facebook.com/InternationalProgrammeHatyairatprachasunSchool">โครงการ IP</a></li>
+                        <li><a href="https://www.facebook.com/profile.php?id=100063654231756">โครงการ SMA</a></li>
+                        <li><a href="https://www.facebook.com/hatyairatprachasun2024">โครงการอื่นๆ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>ติดต่อเรา</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+66741234567"><i class="fas fa-phone-alt"></i> N/A</a></li>
+                        <li><a href="mailto:N/A"><i class="fas fa-envelope"></i> N/A</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> อำเภอหาดใหญ่ จังหวัดสงขลา</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <div style="text-align: center; color: white;">
+                    <p>
+                      &copy; 2025 โรงเรียนหาดใหญ่รัฐประชาสรรค์. สงวนลิขสิทธิ์. |
+                      Coding by <a href="https://portfolio.grinzaza.xyz/" target="_blank" style="color: white; text-decoration: underline;">Natawat Pipatpongsatorn</a>
+                    </p>
+                  </div>                  
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.add('active');
+        });
+        
+        closeMenuBtn.addEventListener('click', () => {
+            mainNav.classList.remove('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mainNav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Active link highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 300) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+</script>
+</body>
+</html>
