@@ -1159,81 +1159,43 @@
             </div>
         </div>
     </section>
-    
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('.contact-form form');
-    
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // รับค่าจากฟอร์ม
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value;
-        
-        // ตรวจสอบข้อมูล
-        if (!name || !email || !subject || !message) {
-            alert('กรุณากรอกข้อมูลให้ครบทุกช่อง');
-            return;
-        }
-        
-        // URL ของ Discord webhook
-        const webhookURL = 'https://canary.discord.com/api/webhooks/1369518786775875714/iNgCn7Fqg1gKcMfVxxSnCayCg1sKpw_HPns3kdC5TDGoCIZAsxm3xWIdl_KyWpkA3lFT';
-        
-        // สร้างข้อมูลที่จะส่งไป Discord
-        const payload = {
-            embeds: [{
-                title: subject,
-                color: 3447003, // สีฟ้า
-                fields: [
-                    {
-                        name: 'ชื่อผู้ส่ง',
-                        value: name,
-                        inline: true
-                    },
-                    {
-                        name: 'อีเมล',
-                        value: email,
-                        inline: true
-                    },
-                    {
-                        name: 'ข้อความ',
-                        value: message
-                    }
-                ],
-                timestamp: new Date().toISOString()
-            }]
-        };
-        
-        // ส่งข้อมูลไปยัง Discord webhook
-        fetch(webhookURL, {
-            method: 'POST',
+        const form = document.querySelector(".contact-form form");
+      
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+      
+          const name = document.querySelector("#name").value;
+          const email = document.querySelector("#email").value;
+          const subject = document.querySelector("#subject").value;
+          const message = document.querySelector("#message").value;
+      
+          const response = await fetch("https://sheetdb.io/api/v1/dgjp1ztno7eq0", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (response.ok) {
-                // ล้างฟอร์ม
-                form.reset();
-                
-                // แสดงข้อความสำเร็จ
-                alert('ส่งข้อความสำเร็จ ขอบคุณที่ติดต่อเรา');
-            } else {
-                alert('เกิดข้อผิดพลาดในการส่งข้อความ กรุณาลองใหม่อีกครั้ง');
-                console.error('Error:', response.status);
-            }
-        })
-        .catch(error => {
-            alert('เกิดข้อผิดพลาดในการส่งข้อความ กรุณาลองใหม่อีกครั้ง');
-            console.error('Error:', error);
+            body: JSON.stringify({
+              data: [
+                {
+                  name: name,
+                  email: email,
+                  subject: subject,
+                  message: message
+                }
+              ]
+            })
+          });
+      
+          if (response.ok) {
+            alert("ส่งข้อความเรียบร้อยแล้ว!");
+            form.reset();
+          } else {
+            alert("เกิดข้อผิดพลาด กรุณาลองใหม่");
+          }
         });
-    });
-});
-    </script>
+      </script>
 
     <!-- Footer -->
     <footer>
